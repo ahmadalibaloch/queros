@@ -1,13 +1,13 @@
 import { FC } from 'react';
 
 interface Prop {
-  setDarkMode: (isDarkMode: boolean) => void;
-  darkMode: string;
+  setTheme: (theme: 'light' | 'dark') => void;
+  theme: string;
 }
 
-const Topbar: FC<Prop> = ({ setDarkMode, darkMode }) => {
+const Topbar: FC<Prop> = ({ setTheme, theme }) => {
   return (
-    <div className='navbar bg-base-100' data-theme={darkMode}>
+    <div className='navbar bg-base-100' data-theme={theme}>
       <div className='flex-none'>
         <button className='btn btn-square btn-ghost'>
           <svg
@@ -34,8 +34,10 @@ const Topbar: FC<Prop> = ({ setDarkMode, darkMode }) => {
           <input
             type='checkbox'
             className='toggle'
-            onChange={(event) => setDarkMode(event.target.checked)}
-            checked={darkMode == 'dark'}
+            onChange={(event) =>
+              setTheme(event.target.checked ? 'dark' : 'light')
+            }
+            checked={theme == 'dark'}
           />
         </label>
       </div>
