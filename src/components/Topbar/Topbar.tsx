@@ -8,7 +8,7 @@ interface Prop {
 const Topbar: FC<Prop> = ({ setTheme, theme }) => {
   return (
     <div className='navbar bg-base-100' data-theme={theme}>
-      <div className='flex-none'>
+      <div className='flex-none' data-testid='menu-button'>
         <button className='btn btn-square btn-ghost'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -32,11 +32,13 @@ const Topbar: FC<Prop> = ({ setTheme, theme }) => {
         <label className='label cursor-pointer'>
           <span className='label-text mr-5'>Dark Mode</span>
           <input
+            data-testid='theme-toggle'
             type='checkbox'
             className='toggle'
-            onChange={(event) =>
-              setTheme(event.target.checked ? 'dark' : 'light')
-            }
+            onChange={(event) => {
+              console.log('calling set theme');
+              setTheme(event.target.checked ? 'dark' : 'light');
+            }}
             checked={theme == 'dark'}
           />
         </label>

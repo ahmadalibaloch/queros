@@ -12,7 +12,7 @@ const initialState: {
 };
 const ProductsStateContext = createContext(initialState);
 
-const fetchProducts = async () => {
+export const fetchProducts = async () => {
   const res = await fetch(API_URL);
   const data = await res.json();
 
@@ -22,7 +22,6 @@ const fetchProducts = async () => {
       ...product,
       isNew: product?.published?.$date.includes(CURRENT_YEAR) ?? false,
     })) ?? [];
-  // Pass data to the page via props
   return tappedProducts;
 };
 

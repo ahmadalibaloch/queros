@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import Image from 'next/image';
 
 import Page from '@/components/Page';
 import Search from '@/components/Search';
 
-import Product from '@/types/Product';
 import Link from 'next/link';
 import { useProductsState } from '@/context/productsContext';
 
@@ -22,10 +20,6 @@ export default function Products() {
         cat?.toLowerCase()?.includes(searchText.toLowerCase())
       )
   );
-
-  const goToProductPage = (index: number) => {
-    const product: Product = productsList[index];
-  };
 
   return (
     <Page>
@@ -45,7 +39,10 @@ export default function Products() {
       <div className='grid grid-cols-3 gap-5 bg-transparent p-5'>
         {productsList.map((product, pIndex) => (
           <Link href={`/products/${product.isbn}`} key={pIndex}>
-            <div className='card w-96 cursor-pointer bg-base-100 shadow-xl'>
+            <div
+              className='card w-96 cursor-pointer bg-base-100 shadow-xl'
+              data-testid='product-item'
+            >
               {product.thumbnailUrl && (
                 <figure>
                   <img src={product.thumbnailUrl} alt={product.title} />
@@ -60,7 +57,7 @@ export default function Products() {
                 </h2>
                 <p className='... truncate'>{product.shortDescription}</p>
                 <div className='card-actions justify-end'>
-                  {product.categories.map((category, index) => (
+                  {product.categories?.map((category, index) => (
                     <div key={index} className='badge badge-outline'>
                       {category}
                     </div>

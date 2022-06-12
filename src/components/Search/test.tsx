@@ -1,11 +1,20 @@
-describe('Open Graph function should work correctly', () => {
-  it('should not return templateTitle when not specified', () => {
-    const result = 'a;';
-    expect(result).not.toContain('&templateTitle=');
-  });
+import { render, screen, waitFor } from '@testing-library/react';
+import Search from './Search';
+import '@testing-library/jest-dom';
+import { ComponentProps } from 'react';
 
-  it('should return templateTitle when specified', () => {
-    const result = 'a;';
-    expect(result).toContain('&templateTitle=Test%20Template%20Title');
+const renderComponent = (props: ComponentProps<typeof Search>) =>
+  render(<Search {...props} />);
+describe('Search', () => {
+  it('renders', async () => {
+    const onChangeMock = jest.fn();
+    const searchText = 'test';
+    renderComponent({ onChange: onChangeMock, value: searchText });
+    const searchInput = screen.getByPlaceholderText('Search…');
+
+    expect(searchInput).toBeInTheDocument();
+    waitFor(() => {
+      expect(searchText).toBeInTheDocument();
+    });
   });
 });
