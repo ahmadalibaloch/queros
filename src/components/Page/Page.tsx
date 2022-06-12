@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { FC, ReactNode } from 'react';
 
-import Layout from '@/components/layout/Layout';
+import Layout from '../Layout';
 import Topbar from '../Topbar';
 import { useAppState } from '@/context/AppContext';
 
@@ -16,8 +16,11 @@ const Page: FC<Props> = ({ children }) => {
     <Layout>
       <Topbar setTheme={setTheme} theme={theme} />
 
-      <main className={clsx(`flex w-full justify-center`)} data-theme={theme}>
-        <section>{children}</section>
+      <main
+        className={clsx(`w-full flex-col justify-center`)}
+        data-theme={theme}
+      >
+        {children}
       </main>
     </Layout>
   );
